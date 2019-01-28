@@ -77,10 +77,16 @@ let () = x := -1
 let () = test (TmLam ("x", TmLam("y", TmVar("x"))))
 
 let () = x := -1
-(* λx.λy.x y *)
+(* λx.λy.xy *)
 let () = test (TmLam ("x", TmLam("y", TmApp(TmVar("x"),TmVar("y")))))
 
 let () = x := -1
 (* S combinator *)
 (* λx.λy.λz.(xz)(yz)*)
 let () = test (TmLam("x", TmLam("y", TmLam("z",TmApp(TmApp(TmVar("x"),TmVar("z")),TmApp(TmVar("y"),TmVar("z")))))))
+
+let () = x := -1
+(* Y combinator, with Identity applied to it *)
+(* The generated equations are ununifiable *)
+let () = test (TmApp(TmLam("x",TmApp(TmVar("x"),TmVar("x"))),TmLam("x",TmApp(TmVar("x"),TmVar("x")))))
+
